@@ -51,7 +51,7 @@ let listCommand = Command(usage: "list") { _, _ in
 }
 
 let addCommand = Command(usage: "add") { _, _ in
-    print("list all target")
+    print("add linkedFramework")
 }
 
 let removeCommand = Command(usage: "remove") { _, _ in
