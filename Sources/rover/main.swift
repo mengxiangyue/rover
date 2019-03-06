@@ -1,19 +1,35 @@
 
 
-
+import Foundation
 import Guaka
 
-guard let utils = ProjectUtils(projectPath: "/Users/Xiangyue.Meng/Downloads/TestFramework/TestFramework.xcodeproj") else {
-    fatalError("can't open the project")
-}
-for proj in utils.listAllProjects() {
-    print(proj.name)
-}
-for target in utils.listTargets() {
-    print(target.name)
-}
+//guard let utils = ProjectUtils(projectPath: "/Users/Xiangyue.Meng/Downloads/TestFramework/TestFramework.xcodeproj") else {
+//    fatalError("can't open the project")
+//}
+//for proj in utils.listAllProjects() {
+//    print(proj.name)
+//}
+//for target in utils.listTargets() {
+//    print(target.name)
+//}
+//
+//try utils.removeLinkedFramework(frameworkName: "CoreService")
 
-try utils.removeLinkedFramework(frameworkName: "CoreService")
+//let generation = Generation(buildFoler: "/Users/xiangyue/Downloads/build")
+//generation.buildTarget(project: "/Users/xiangyue/Downloads/TestFramework/TestFramework.xcworkspace", scheme: "UserService", type: .simulator)
+//generation.buildTarget(project: "/Users/xiangyue/Downloads/TestFramework/TestFramework.xcworkspace", scheme: "UserService", type: .realDevice)
+//generation.generationFramework(name: "UserService")
+
+
+let task = Process()
+task.currentDirectoryPath = "/Users/xiangyue/Downloads/TestFramework/UserService"
+task.launchPath = "/usr/bin/env"
+task.arguments = ["sh", "gen.sh"]
+task.launch()
+task.waitUntilExit()
+task.terminationStatus
+
+
 
 
 let version = Flag(longName: "version", value: false, description: "Prints the version")
