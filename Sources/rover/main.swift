@@ -3,6 +3,12 @@
 import Foundation
 import Guaka
 
+/*
+ https://medium.com/@johnsundell/building-a-command-line-tool-using-the-swift-package-manager-3dd96ce360b1
+ can use this command to package the tool
+ swift build -c release -Xswiftc -static-stdlib
+ */
+
 //guard let utils = ProjectUtils(projectPath: "/Users/Xiangyue.Meng/Downloads/TestFramework/TestFramework.xcodeproj") else {
 //    fatalError("can't open the project")
 //}
