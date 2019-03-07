@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import Shell
+// https://github.com/tuist/shell.git
+//import Shell
 
 public struct Generation {
     public enum BuildType {
