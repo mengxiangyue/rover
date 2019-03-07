@@ -21,13 +21,15 @@ import Guaka
 //generation.generationFramework(name: "UserService")
 
 
-let task = Process()
-task.currentDirectoryPath = "/Users/xiangyue/Downloads/TestFramework/UserService"
-task.launchPath = "/usr/bin/env"
-task.arguments = ["sh", "gen.sh"]
-task.launch()
-task.waitUntilExit()
-task.terminationStatus
+//let task = Process()
+//task.currentDirectoryPath = "/Users/xiangyue/Downloads/TestFramework/"
+//task.launchPath = "/usr/bin/env"
+//task.arguments = ["sh", "gen.sh", "TestFramework", "CoreService"]
+//task.launch()
+//task.waitUntilExit()
+//let code = task.terminationStatus
+//print("code -----> \(code)")
+generationFramework(path: "/Users/xiangyue/Downloads/TestFramework/", workspace: "TestFramework", target: "CoreService")
 
 
 

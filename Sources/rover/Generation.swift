@@ -47,6 +47,7 @@ public struct Generation {
         print("result ---> \(task.terminationStatus)")
     }
     
+    // this function has errors, so change to use shell script to implement this function
     func generationFramework(name: String) {
         let deviceDir = " \(buildFoler)build/iphoneos/Build/Intermediates.noindex/ArchiveIntermediates/\(name)/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/\(name).framework"
         let simulatorDir = "\(buildFoler)build/iphonesimulator/Build/Products/Release-iphonesimulator/\(name).framework"
@@ -65,5 +66,35 @@ public struct Generation {
         task.waitUntilExit()
         return task.terminationStatus
     }
+}
+
+func generationFramework(path: String, workspace: String, target: String) -> Int {
+    let task = Process()
+    
+    let outpipe = Pipe()
+    task.standardOutput = outpipe
+    let errpipe = Pipe()
+    task.standardError = errpipe
+    
+    task.currentDirectoryPath = path
+    task.launchPath = "/usr/bin/env"
+    task.arguments = ["sh", "gen.sh", workspace, target]
+    task.launch()
+    let errdata = errpipe.fileHandleForReading.availableData
+    let errString = String(data: errdata, encoding: String.Encoding.utf8) ?? ""
+    if errString != "" {
+        print("run command with error: \(errString)")
+        print("command:")
+        print(task.arguments?.joined(separator: " "))
+    }
+    outpipe.fileHandleForReading.readabilityHandler = { fileHandle in
+        if let string = String(data: fileHandle.availableData, encoding: String.Encoding.utf8), string.count > 0 {
+            // maybe need to write this log into somewhere
+//            print("------ \(Date()) \(string)")
+        }
+    }
+    task.waitUntilExit()
+    let code = task.terminationStatus
+    return Int(code)
 }
 
